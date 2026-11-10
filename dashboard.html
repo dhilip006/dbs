@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block content %}
+<div class="dashhead"><div><p class="eyebrow">SHOP CONTROL CENTRE</p><h1>Orders dashboard</h1></div><span class="status">Printer uses shop computer's default printer</span></div>
+<div class="tablewrap"><table><thead><tr><th>Order</th><th>Customer</th><th>Print</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead><tbody>
+{% for o in orders %}<tr style="--i:{{loop.index0}}"><td><b>{{o.id}}</b><br><small>{{o.created_at}}</small><br><a href="/track/{{o.id}}">Track</a></td>
+<td>{{o.customer}}</td>
+<td>{{o.pages}} pages · {{o.copies}} copies<br>{{o.color}} · {{o.sides}} · {{o.layout}}-up<br><a href="/file/processed/{{o.output_file}}" target="_blank">Preview print PDF</a></td>
+<td>{{o.payment_status}}<br>₹{{"%.2f"|format(o.amount)}}</td><td>{{o.status}}</td>
+<td>{% if o.payment_status in ['DEMO_PAID','PAID'] %}<form method="post" action="/admin/{{key}}/print/{{o.id}}"><button class="smallbtn">Send to printer</button></form>{% endif %}
+<form method="post" action="/admin/{{key}}/status/{{o.id}}"><select name="status"><option>PAID_WAITING_PRINT</option><option>PRINTING</option><option>READY_FOR_PICKUP</option><option>COMPLETED</option><option>CANCELLED</option></select><button class="smallbtn">Update</button></form></td></tr>
+{% else %}<tr><td colspan="6">No orders yet.</td></tr>{% endfor %}
+</tbody></table></div>
+{% endblock %}

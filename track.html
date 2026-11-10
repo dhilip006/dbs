@@ -1,0 +1,9 @@
+{% extends "base.html" %}{% block content %}
+<section class="card narrow tilt"><p class="eyebrow">ORDER TRACKING</p><h1>Order {{order.id}}</h1>
+<p><b>{{order.customer}}</b></p>
+<div class="status">{{order.status.replace('_',' ')}}</div>
+<p>Payment: {{order.payment_status}}</p>
+<p>Selected pages: {{order.pages}} · Copies: {{order.copies}}</p>
+<p>Estimated amount: <b>₹{{"%.2f"|format(order.amount)}}</b></p>
+<p class="muted">Save your Order ID to check this page again.</p></section>
+{% endblock %}

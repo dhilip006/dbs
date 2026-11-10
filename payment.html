@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}
+<section class="card narrow tilt"><p class="eyebrow">ORDER CREATED</p><h1>Review your order</h1>
+<div class="price">₹{{"%.2f"|format(amount)}}</div>
+<p class="muted">Order ID: <b>{{order_id}}</b></p>
+<div class="note warning">Demo checkout only. This button does not charge money. A real UPI/card payment gateway and server-side payment verification must be connected before public launch.</div>
+<form method="post" action="/demo-pay/{{order_id}}"><button class="primary"><span>Simulate successful payment</span></button></form>
+<a class="secondary" href="/">Back</a></section>
+{% endblock %}

@@ -1,0 +1,140 @@
+/* ---- Fonts (bundled locally; Cinzel is the closest open font to God of War's title lettering) ---- */
+@font-face{font-family:"GoW";src:url("fonts/GodOfWar.woff2") format("woff2"),url("fonts/GodOfWar.ttf") format("truetype");font-display:swap}
+@font-face{font-family:"Cinzel";font-weight:500;src:url("fonts/cinzel-latin-500-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Cinzel";font-weight:700;src:url("fonts/cinzel-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Cinzel";font-weight:900;src:url("fonts/cinzel-latin-900-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Cinzel Decorative";font-weight:700;src:url("fonts/cinzel-decorative-latin-700-normal.woff2") format("woff2");font-display:swap}
+@font-face{font-family:"Cinzel Decorative";font-weight:900;src:url("fonts/cinzel-decorative-latin-900-normal.woff2") format("woff2");font-display:swap}
+
+:root{
+  --bg:#0b0707;--panel:#15100f;--panel2:#1d1514;--line:#3a2a22;
+  --blood:#b3121b;--blood2:#e02a2a;--gold:#c9a45c;--gold2:#f0d28a;--text:#e9ded0;--dim:#9a8b7a;
+  --font:"GoW","Cinzel","Trajan Pro",Georgia,serif;
+  --display:"GoW","Cinzel Decorative","Cinzel",Georgia,serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--text);font-family:var(--font);font-weight:500;letter-spacing:.4px;
+  background:radial-gradient(ellipse at 50% -10%,#3a0d0d 0%,#140a0a 45%,var(--bg) 80%) fixed;overflow-x:hidden}
+#embers{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.vignette{position:fixed;inset:0;z-index:1;pointer-events:none;background:radial-gradient(ellipse at center,transparent 45%,#000000cc 100%)}
+nav,main,footer{position:relative;z-index:2}
+
+/* ---- nav ---- */
+.topnav{height:74px;padding:0 max(5vw,20px);display:flex;align-items:center;justify-content:space-between;
+  background:linear-gradient(#000000e0,#000000a0);border-bottom:1px solid var(--line);
+  box-shadow:0 8px 30px #000a;animation:dropIn .8s cubic-bezier(.2,.9,.3,1) both}
+.topnav a{text-decoration:none}
+.brand{font-family:var(--display);font-weight:900;font-size:24px;letter-spacing:4px;color:var(--text);
+  text-shadow:0 2px 0 #000,0 0 18px #b3121b80}
+.brand span{color:var(--blood2)}
+.navlink{color:var(--gold);font-size:13px;letter-spacing:3px;text-transform:uppercase;font-weight:700;
+  padding:10px 16px;border:1px solid var(--line);transform:perspective(500px) rotateX(0);transition:.3s}
+.navlink:hover{color:#fff;border-color:var(--blood);transform:perspective(500px) rotateX(-12deg) translateY(-2px);box-shadow:0 10px 25px #b3121b55}
+
+main{max-width:1080px;margin:34px auto;padding:0 18px;perspective:1400px}
+
+/* ---- typography ---- */
+h1,.hero h1{font-family:var(--display);font-weight:900;text-transform:uppercase;letter-spacing:3px;
+  font-size:clamp(34px,5.4vw,60px);line-height:1.06;margin:12px 0 16px;color:var(--text);
+  text-shadow:0 1px 0 #6b0d12,0 2px 0 #4d090d,0 3px 0 #300508,0 8px 22px #000,0 0 30px #b3121b55}
+.hero h1 span{color:var(--blood2);text-shadow:0 1px 0 #7a0a10,0 2px 0 #4d090d,0 3px 0 #300508,0 0 30px #e02a2a99}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:5px;color:var(--gold);margin:0}
+.muted,small{color:var(--dim)}small{font-size:12px;letter-spacing:.5px}
+
+/* ---- hero + 3D rune cube ---- */
+.hero{display:flex;justify-content:space-between;align-items:center;gap:30px;padding:26px 4px 40px}
+.hero-text{animation:riseIn .9s .15s cubic-bezier(.2,.9,.3,1) both}
+.scene{width:230px;height:260px;position:relative;perspective:900px;flex:none;animation:riseIn .9s .35s both}
+.cube{position:absolute;left:50%;top:50px;width:120px;height:120px;margin-left:-60px;transform-style:preserve-3d;
+  animation:spin 14s linear infinite,bob 4s ease-in-out infinite}
+.face{position:absolute;width:120px;height:120px;display:grid;place-items:center;font-size:62px;font-family:var(--display);
+  color:var(--gold2);background:linear-gradient(145deg,#2a1a17,#0e0808);border:2px solid var(--gold);
+  box-shadow:inset 0 0 28px #b3121bb0,0 0 22px #b3121b66;text-shadow:0 0 18px #e02a2a,0 0 4px #000}
+.f-front{transform:translateZ(60px)}.f-back{transform:rotateY(180deg) translateZ(60px)}
+.f-right{transform:rotateY(90deg) translateZ(60px)}.f-left{transform:rotateY(-90deg) translateZ(60px)}
+.f-top{transform:rotateX(90deg) translateZ(60px)}.f-bottom{transform:rotateX(-90deg) translateZ(60px)}
+.cube-shadow{position:absolute;left:50%;bottom:48px;width:130px;height:26px;margin-left:-65px;border-radius:50%;
+  background:radial-gradient(#b3121b99,transparent 70%);animation:shadow 4s ease-in-out infinite}
+.scene-label{position:absolute;bottom:0;width:100%;text-align:center;margin:0;color:var(--gold);letter-spacing:6px;font-size:12px;font-weight:700}
+@keyframes spin{from{transform:rotateX(-22deg) rotateY(0)}to{transform:rotateX(-22deg) rotateY(360deg)}}
+@keyframes bob{0%,100%{top:50px}50%{top:34px}}
+@keyframes shadow{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(.7);opacity:.5}}
+
+/* ---- cards (3D tilt applied by JS via --rx/--ry) ---- */
+.card{position:relative;background:linear-gradient(160deg,var(--panel2),var(--panel) 60%);border:1px solid var(--line);
+  border-top:2px solid var(--gold);padding:34px;margin-bottom:40px;transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .15s ease-out,box-shadow .3s;
+  box-shadow:0 30px 60px #000c,0 0 0 1px #000,inset 0 1px 0 #ffffff10;animation:cardIn 1s .25s cubic-bezier(.2,.9,.3,1) both}
+.card::before,.card::after{content:"";position:absolute;width:26px;height:26px;border:2px solid var(--blood);pointer-events:none}
+.card::before{top:-2px;left:-2px;border-right:0;border-bottom:0}.card::after{bottom:-2px;right:-2px;border-left:0;border-top:0}
+.card:hover{box-shadow:0 40px 80px #000d,0 0 40px #b3121b30}
+.card h2{font-size:17px;letter-spacing:3px;text-transform:uppercase;color:var(--gold2);margin:30px 0 14px;font-weight:700;transform:translateZ(30px)}
+.card h2:first-of-type{margin-top:0}
+.card h2 i{font-style:normal;color:var(--blood2);margin-right:10px;font-family:var(--display)}
+.narrow{max-width:600px;margin:40px auto}
+
+/* ---- forms ---- */
+label{display:block;font-weight:700;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin:14px 0;color:var(--gold)}
+input,select{display:block;width:100%;margin-top:8px;padding:13px;border:1px solid var(--line);background:#0a0606;color:var(--text);
+  font:inherit;letter-spacing:.5px;transition:.25s;transform:translateZ(0)}
+input::placeholder{color:#6f6254}
+input:focus,select:focus{outline:0;border-color:var(--blood2);box-shadow:0 0 0 1px var(--blood2),0 10px 28px #b3121b40;transform:translateZ(14px) translateY(-2px)}
+select option{background:#0a0606}
+.upload{border:2px dashed #5a3a2c;padding:30px 22px;text-align:center;background:repeating-linear-gradient(45deg,#120b0a,#120b0a 10px,#160d0c 10px,#160d0c 20px);
+  cursor:pointer;transition:.3s;text-transform:none;letter-spacing:1px;color:var(--text)}
+.upload:hover,.upload.drag{border-color:var(--blood2);box-shadow:0 0 35px #b3121b50,inset 0 0 30px #b3121b25;transform:translateZ(20px) scale(1.01)}
+.upload-icon{display:block;font-size:40px;color:var(--blood2);margin-bottom:6px;animation:pulse 2.2s ease-in-out infinite}
+.upload input{border:0;background:transparent;box-shadow:none;margin-top:12px;color:var(--dim);font-size:13px}
+.upload small{display:block;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+@keyframes pulse{0%,100%{transform:scale(1);text-shadow:0 0 0 #e02a2a}50%{transform:scale(1.15);text-shadow:0 0 22px #e02a2a}}
+
+/* ---- buttons: chunky 3D ---- */
+.primary{position:relative;border:0;color:#fff;padding:15px 30px;margin-top:22px;cursor:pointer;font:inherit;font-weight:900;
+  letter-spacing:3px;text-transform:uppercase;background:linear-gradient(#d3202a,#8c0d14);
+  box-shadow:0 6px 0 #4d070b,0 14px 26px #b3121b66,inset 0 1px 0 #ffffff40;transform:translateZ(30px);transition:.15s;overflow:hidden}
+.primary::after{content:"";position:absolute;top:0;left:-120%;width:60%;height:100%;background:linear-gradient(100deg,transparent,#ffffff50,transparent);transform:skewX(-20deg);transition:.6s}
+.primary:hover{transform:translateZ(30px) translateY(-3px);box-shadow:0 9px 0 #4d070b,0 22px 34px #e02a2a77,inset 0 1px 0 #ffffff50}
+.primary:hover::after{left:140%}
+.primary:active{transform:translateZ(30px) translateY(5px);box-shadow:0 1px 0 #4d070b,0 4px 10px #b3121b66}
+
+.note{background:#1a1210;border-left:3px solid var(--gold);padding:14px;color:var(--dim);font-size:13px;margin:20px 0;letter-spacing:.5px}
+.warning{border-left-color:var(--blood2);color:#d9a98f}
+.price{font-family:var(--display);font-size:56px;color:var(--gold2);font-weight:900;margin:22px 0;text-shadow:0 3px 0 #5a3a10,0 0 30px #c9a45c66;animation:pop .8s .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes pop{from{transform:scale(.4) rotateX(70deg);opacity:0}to{transform:none;opacity:1}}
+.secondary{display:inline-block;margin:20px;color:var(--gold);letter-spacing:2px;text-decoration:none;text-transform:uppercase;font-size:13px;transition:.2s}
+.secondary:hover{color:var(--blood2);transform:translateX(-5px)}
+.status{display:inline-block;padding:9px 14px;border:1px solid var(--gold);color:var(--gold2);font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:#1a120d;animation:glow 2.5s ease-in-out infinite}
+@keyframes glow{0%,100%{box-shadow:0 0 0 #c9a45c00}50%{box-shadow:0 0 18px #c9a45c55}}
+
+/* ---- dashboard ---- */
+.dashhead{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:22px;animation:riseIn .8s both}
+.dashhead h1{font-size:38px}
+.tablewrap{overflow:auto;background:var(--panel);border:1px solid var(--line);border-top:2px solid var(--gold);box-shadow:0 25px 55px #000c;animation:cardIn 1s .2s both}
+table{border-collapse:collapse;width:100%;min-width:850px;font-size:13px}
+th,td{text-align:left;padding:15px;border-bottom:1px solid #2a1d18;vertical-align:top}
+th{background:#0e0908;color:var(--gold);letter-spacing:3px;text-transform:uppercase;font-size:11px}
+tbody tr{animation:rowIn .6s calc(var(--i,0)*80ms + .4s) both;transition:.25s}
+tbody tr:hover{background:#221513;transform:translateZ(0) scale(1.005);box-shadow:0 0 24px #b3121b40}
+td a{color:var(--gold)}td a:hover{color:var(--blood2)}
+.smallbtn{border:1px solid var(--gold);background:#1a120d;color:var(--gold2);padding:8px 10px;margin:3px;cursor:pointer;font:inherit;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;box-shadow:0 3px 0 #000;transition:.15s}
+.smallbtn:hover{background:var(--blood);border-color:var(--blood2);color:#fff;transform:translateY(-2px)}
+.smallbtn:active{transform:translateY(2px);box-shadow:none}
+td select{padding:8px;font-size:12px;margin:0 0 4px}
+
+.alerts{background:#2a0b0c;border:1px solid var(--blood);border-left:4px solid var(--blood2);color:#ffb3a8;padding:6px 18px;margin-bottom:22px;animation:shake .5s,riseIn .6s both}
+footer{text-align:center;padding:28px;color:#6f6254;font-size:12px;letter-spacing:3px;text-transform:uppercase}
+
+/* ---- keyframes ---- */
+@keyframes riseIn{from{opacity:0;transform:translateY(40px) translateZ(-80px)}to{opacity:1;transform:none}}
+@keyframes cardIn{from{opacity:0;transform:rotateX(35deg) translateY(70px) scale(.94)}to{opacity:1;transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}}
+@keyframes rowIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:none}}
+@keyframes dropIn{from{transform:translateY(-100%)}to{transform:none}}
+@keyframes shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+
+@media(max-width:700px){.hero{flex-direction:column;align-items:flex-start}.scene{align-self:center}.card{padding:22px}.dashhead{align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}}
+
+input[type=file]::file-selector-button{border:1px solid var(--gold);background:#1a120d;color:var(--gold2);padding:9px 14px;margin-right:12px;cursor:pointer;font:inherit;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;transition:.2s}
+input[type=file]::file-selector-button:hover{background:var(--blood);border-color:var(--blood2);color:#fff}
